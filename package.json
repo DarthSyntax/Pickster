@@ -1,0 +1,26 @@
+{
+  "name": "pickster",
+  "version": "1.0.0",
+  "description": "Social media ",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Stael Petit Blanc",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^18.11.17",
+    "bcrypt": "^5.0.1",
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
+    "mocha": "^10.2.0",
+    "mongoose": "^6.3.4",
+    "morgan": "^1.10.0",
+    "nock": "^13.2.9",
+    "supertest": "^6.3.3",
+    "validator": "^13.7.0"
+  }
+}
