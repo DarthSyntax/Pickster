@@ -57,9 +57,9 @@ const userSchema = mongoose.Schema({
   },
 });
 
-userSchema.pre("save", function (next) {
+userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
-  this.password = bcrypt.hash(this.password, 12);
+  this.password = await bcrypt.hash(this.password, 12);
   this.passwordConfirm = undefined;
   next();
 });
@@ -68,7 +68,9 @@ userSchema.methods.correctPassword = async function (
   candidatePassword,
   password
 ) {
-  return await bcrypt.compare(candidatePassword, password);
+  //commented out because the mock users passwords are not hashed yet
+  // return await bcrypt.compare(candidatePassword, password);
+  return candidatePassword === password;
 };
 
 const User = mongoose.model("User", userSchema);

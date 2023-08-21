@@ -64,6 +64,26 @@ exports.getPic = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getPicBySrc = catchAsync(async (req, res, next) => {
+  const { src } = req.body;
+  const pic = await Pic.findOne({ image: src });
+  if (!pic) return next("No picture found with that source", 404);
+
+  res.status(200).json({
+    _id: pic._id,
+  });
+});
+
+exports.getPicsByUserName = catchAsync(async (req, res, next) => {
+  const { username } = req.params;
+  const pics = await Pic.find({ user: username });
+  if (!pics) return next("No pictures found from that user", 404);
+
+  res.status(200).json({
+    data: pics,
+  });
+});
+
 exports.deletePic = catchAsync(async (req, res, next) => {
   const pic = await Pic.findByIdAndDelete(req.params.id);
   if (!pic) {
