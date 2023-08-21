@@ -16,4 +16,8 @@ router
   .patch(picController.commentPic)
   .delete(picController.deletePic);
 
+router.route("/searchbysrc").post(picController.getPicBySrc);
+
+router.route("/userspics/:username").get(picController.getPicsByUserName);
+
 module.exports = router;

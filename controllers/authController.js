@@ -3,6 +3,7 @@ const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appError");
 const jwt = require("jsonwebtoken");
 const util = require("util");
+const axios = require("axios");
 
 const signToken = (user, res) => {
   const token = jwt.sign(
@@ -40,13 +41,15 @@ exports.login = catchAsync(async (req, res, next) => {
 
   //2 Check if the user exists && password is correct
   const user = await User.findOne({ email: email });
-  if (!user || !user.correctPassword(password, user.password)) {
+  if (!user || !(await user.correctPassword(password, user.password))) {
     return next(new AppError("Incorrect email or password", 401));
   }
 
   //3) If everything is ok, send token to client
   signToken(user, res);
 });
+
+exports.authenticateChat = catchAsync(async (req, res, next) => {});
 
 exports.protect = catchAsync(async (req, res, next) => {
   //1 Getting token and check if authorization is

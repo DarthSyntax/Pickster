@@ -11,4 +11,6 @@ router.route("/").get(userController.getUsers);
 router.route("/:id").patch(authController.protect, userController.followUser);
 
 router.route("/:username").get(userController.getUserByUsername);
+
+// router.route("/authenticatechat").post(authController.authenticateChat);
 module.exports = router;
